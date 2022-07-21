@@ -70,7 +70,7 @@ class MyCash {
                 cout << "password didnt match inside myCash" << endl;
             }
         }
-        
+
         int show_balance() {
             return this->balance;
         }
@@ -120,12 +120,26 @@ int main() {
     BankAccount *myAccount = create_account();
     MyCash *myCash = new MyCash();
     
-    // if (!myAccount->show_balance("mehedi") == -1) cout << "password didnt match" << endl;
-    // else cout << "Your balance is : " << myAccount->show_balance("mehedi") << endl;
-    // add_money(myAccount);
-    // cout << "your bank balance is : " << myAccount->show_balance("mehedi") << endl;
-    // deposit_money(myAccount);
-    // cout << myAccount->show_balance("mehedi") << endl;
-    // add_money_form_bank(myCash, myAccount);
-    // cout << myAccount->show_balance("mehedi") << endl;
+    while(true) {
+        cout << "SELECT OPTION : " << endl;
+        cout << "1. ADD MONEY TO BANK" << endl;
+        cout << "2. DEPOSIT MONEY FROM BANK" << endl;
+        cout << "3. ADD MONEY TO MYCAHS FROM BANK" << endl;
+
+        int option;
+        cin >> option;
+
+        if (option == 1) {
+            add_money(myAccount);
+        }
+        else if (option == 2) {
+            deposit_money(myAccount)
+        }
+        else if (option == 3) {
+            add_money_form_bank(myCash, myAccount);
+        }
+        else {
+            cout << "Invalid  input " << endl;
+        }
+    }
 }
