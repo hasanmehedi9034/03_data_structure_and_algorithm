@@ -25,6 +25,10 @@ class BankAccount {
             if (password == this->password) return this->balance;
             return -1;
         }
+        void add_money(string password, int amount) {
+            if (password == this->password) this->balance += amount;
+            else cout << "password didnt match for adding money" << endl;
+        }
 };
 
 BankAccount *create_account () {
@@ -40,9 +44,20 @@ BankAccount *create_account () {
     return my_account;
 }
 
+void add_money (BankAccount *my_account) {
+    string password;
+    int amount;
+
+    cout << "ADD MONEY : PASSWORD(string), AMOUNT(int)" << endl;
+    cin >> password >> amount;
+    my_account->add_money(password, amount);
+}
+
 int main() {
     BankAccount *myAccount = create_account();
     
     // if (!myAccount->show_balance("mehedi") == -1) cout << "password didnt match" << endl;
     // else cout << "Your balance is : " << myAccount->show_balance("mehedi") << endl;
+    // add_money(myAccount);
+    // cout << "your bank balance is : " << myAccount->show_balance("mehedi") << endl;
 }
