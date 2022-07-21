@@ -116,6 +116,15 @@ void add_money_from_bank(My_cash *my_cash, Bank_Account *my_account) {
 int main() {
     Bank_Account *my_account = create_account();
 
+    while (true) {
+        cout << "Select option" << endl;
+        cout << "1. Add money to bank" << endl;
+        cout << "2. deposit money to bank" << endl;
+        cout << "3. Add money to MyCash from bank" << endl;
+        int option;
+        cin >> option;
+    }
+
     // if (my_account->show_balance("mehedi") == -1) {
     //     cout << "password didnt match";
     // }
