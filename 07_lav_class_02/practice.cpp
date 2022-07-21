@@ -21,20 +21,58 @@ class BankAccount {
             this->account_number = rand() % 1000000000;
             this->balance = 0;
         }
+
         int show_balance(string password) {
             if (password == this->password) return this->balance;
             return -1;
         }
+
         void add_money(string password, int amount) {
+            if (amount < 0) {
+                cout << "invalid amount" << endl;
+                return;
+            }
             if (password == this->password) this->balance += amount;
             else cout << "password didnt match for adding money" << endl;
         }
+
         void deposit_money(string password, int amount) {
+            if (this->balance < amount) {
+                cout << "insufficient balance " << endl;
+                return;
+            }
             if (password == this->password) {
                 this->balance -= amount;
                 cout << "Money withdraw successful" << endl;
             }
             else cout << "password didnt match" << endl;
+        }
+
+        friend class MyCash;
+};
+
+class MyCash {
+    protected:
+        int balance;
+    
+    public:
+        MyCash() {
+            this->balance = 0;
+        }
+
+        void add_money_form_bank(BankAccount *my_account, string password, int amount) {
+            if (my_account->password == password) {
+                this->balance += amount;
+                my_account->balance -= amount;
+                cout << "Add money from bank successful" << endl;
+            }
+            else {
+                cout << "password didnt match inside myCash" << endl;
+            }
+        }
+        
+        int show_balance() {
+            return this->balance;
         }
 };
 
@@ -69,13 +107,25 @@ void deposit_money(BankAccount *my_account) {
     my_account->deposit_money(password, amount);
 }
 
+void add_money_form_bank(MyCash *my_cash, BankAccount *myAccount) {
+    string password;
+    int amount;
+
+    cout << "ADD MONEY TO MYCASH : PASSWORD(string), AMOUNT(int)" << endl;
+    cin >> password >> amount;
+    my_cash->add_money_form_bank(myAccount, password, amount);
+}
+
 int main() {
     BankAccount *myAccount = create_account();
+    MyCash *myCash = new MyCash();
     
     // if (!myAccount->show_balance("mehedi") == -1) cout << "password didnt match" << endl;
     // else cout << "Your balance is : " << myAccount->show_balance("mehedi") << endl;
     // add_money(myAccount);
     // cout << "your bank balance is : " << myAccount->show_balance("mehedi") << endl;
     // deposit_money(myAccount);
+    // cout << myAccount->show_balance("mehedi") << endl;
+    // add_money_form_bank(myCash, myAccount);
     // cout << myAccount->show_balance("mehedi") << endl;
 }
