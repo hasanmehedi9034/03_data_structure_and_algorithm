@@ -15,6 +15,12 @@ class Restaurant {
         }
 };
 
+void all_codes (Restaurant *res, int a[], int n) {
+    for (int i = 0; i < n; i++) {
+        a[i] = res->food_item_codes[i];
+    }
+}
+
 void take_input(Restaurant *restaurent, int n) {
     int code, price;
     string name;
@@ -49,7 +55,16 @@ void print_all_menu(Restaurant *restaurant, int n) {
     }
 }
 
-int take_order(int item_codes[], int item_quantity[], int n) {
+bool is_valid_item (int a[], int n, int input) {
+    for (int i = 0; i < n; i++) {
+        if (input == a[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int take_order(int item_codes[], int item_quantity[], int n, int all_code[]) {
     int table_no, number_of_items;
     
     cout << "Enter Table No : ";
@@ -61,6 +76,11 @@ int take_order(int item_codes[], int item_quantity[], int n) {
     for (int i = 0; i < number_of_items; i++) {
         cout << "Enter Item " << i + 1 << " Code : ";
         cin >> item_codes[i];
+
+        while (!is_valid_item(all_code, n, item_codes[i])) {
+            cout << "invalid input Code, pls again " << i + 1 << " Code : ";
+            cin >> item_codes[i];
+        }
 
         cout << "Enter Item " << i + 1 << " Quantity : ";
         cin >> item_quantity[i];
@@ -119,6 +139,9 @@ int main() {
     int ordered_codes[n] = {0};
     int ordered_item_quantity[n] = {0};
 
-    int table_no = take_order(ordered_codes, ordered_item_quantity, n);
+    int all_item_code[n];
+    all_codes(restaurant, all_item_code, n);
+    
+    int table_no = take_order(ordered_codes, ordered_item_quantity, n, all_item_code);
     int total = print_order_summary(restaurant, ordered_codes, n, table_no, ordered_item_quantity);
 }
