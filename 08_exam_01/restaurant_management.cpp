@@ -78,7 +78,7 @@ int take_order(int item_codes[], int item_quantity[], int n, int all_code[]) {
         cin >> item_codes[i];
 
         while (!is_valid_item(all_code, n, item_codes[i])) {
-            cout << "invalid input Code, pls again " << i + 1 << " Code : ";
+            cout << "invalid input Code, Please Enter again " << i + 1 << " Code : ";
             cin >> item_codes[i];
         }
 
@@ -102,6 +102,7 @@ int print_order_summary(Restaurant *res, int a[], int n, int table_no, int quant
     cout << "\t\t\t\t\tOrder Summary\t\t\t\t\t" << endl;
     cout << "--------------------------------------------------------------------------------------------" << endl;
     cout << "Table No : " << table_no << endl;
+    cout << "-----------"<< endl;
 
     cout << "Item code\t" << "Item Name\t\t\t" << "Item price\t" << "Item Quantity\t" << "Total Price" << endl;
     cout << "----------\t" << "---------\t\t\t" << "---------- \t" << "-------------\t" << "------------" << endl;
@@ -118,11 +119,13 @@ int print_order_summary(Restaurant *res, int a[], int n, int table_no, int quant
             total = total + quantity[i] * res->food_item_prices[o_item];
         }
     }
-    int tax = (total * (0.05));
+    double tax = (total * (0.05));
+    res->total_tax = res->total_tax + tax;
     total = tax + total;
     cout << "TAX\t\t\t\t\t\t\t\t\t\t" << tax << endl;
     cout << "____________________________________________________________________________________________" << endl;
     cout << "Net Total                                                                       "<< total << endl;
+    cout << endl;
     return total;
 }
 
@@ -133,15 +136,33 @@ int main() {
     Restaurant *restaurant = new Restaurant();
 
     take_input(restaurant, n);
-    print_all_menu(restaurant, n);
-    cout << endl;
 
-    int ordered_codes[n] = {0};
-    int ordered_item_quantity[n] = {0};
+    while(true) {
+        print_all_menu(restaurant, n);
+        cout << endl;
 
-    int all_item_code[n];
-    all_codes(restaurant, all_item_code, n);
-    
-    int table_no = take_order(ordered_codes, ordered_item_quantity, n, all_item_code);
-    int total = print_order_summary(restaurant, ordered_codes, n, table_no, ordered_item_quantity);
-}
+        int ordered_codes[n] = {0};
+        int ordered_item_quantity[n] = {0};
+
+        int all_item_code[n];
+        all_codes(restaurant, all_item_code, n);
+        
+        int table_no = take_order(ordered_codes, ordered_item_quantity, n, all_item_code);
+        int total = print_order_summary(restaurant, ordered_codes, n, table_no, ordered_item_quantity);
+        cout << "Total Shop Tax : " << restaurant->total_tax << endl;
+        cout << "________________________" << endl;
+        cout << endl;
+
+        int is_taken_order_again;
+        cout << "If You Want to take Order again give 1 nor 0 : ";
+        cin >> is_taken_order_again;
+        while(true) {
+            if (!((is_taken_order_again == 0 || is_taken_order_again == 1))) {
+                cout << "Please give 1 or 0 : ";
+                cin >> is_taken_order_again;
+            }
+            else break;
+        }
+        if (!is_taken_order_again) break;
+    }   
+} 
