@@ -21,10 +21,12 @@ int binary_search_recursive(int a[], int x, int lb, int ub) {
         int mid = (lb + ub) / 2;
 
         if (a[mid] == x) return mid;
-        else if (x > a[mid]) binary_search_recursive(a, x, mid + 1, ub);
-        else if (x < a[mid]) binary_search_recursive(a, x, lb, mid - 1);
+        else if (x > a[mid]) return binary_search_recursive(a, x, mid + 1, ub);
+        else return binary_search_recursive(a, x, lb, mid - 1);
     }
-    else return -1;
+    else {
+        return -1;
+    }
 }
 
 int main() {
