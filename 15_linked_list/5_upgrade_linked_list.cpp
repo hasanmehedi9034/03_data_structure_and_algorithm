@@ -41,13 +41,13 @@ int main() {
     Node *head = NULL;
 
     int n;
-    cout << "Enter the value: ";
-    cin >> n;
     
-    char choice;
-    while(choice == 'Y') {
+    char choice = 'y';
+    while(choice == 'Y' || choice == 'y') {
+        cout << "Enter the value: ";
+        cin >> n;
         insert_at_tail(head, n);
-
+        display(head);
         cout << "Do you want to continue: (Y/N) ";
         cin >> choice;
     }
