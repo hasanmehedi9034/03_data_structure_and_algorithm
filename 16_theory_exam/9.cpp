@@ -52,7 +52,7 @@ int main() {
 // All Answer;
 /*
     1. Value of Head is 5;
-    2. 1020 is In place of Question(?) markl
+    2. 1020 is In place of Question(?) mark
     3. 1 is the value of Head->Next->Next->Value.
     4. 24 is total sum value.
 */

@@ -12,10 +12,12 @@ void insertion_sort(int a[], int n) {
     for (int i = 1; i < n; i++) {
         int key = a[i];
         int j = i - 1;
+        // checking which is the suitable palace of key element
         while (j >= 0 && a[j] > key) {
             a[j + 1] = a[j];
             j--;
         }
+        // placing key element of his right place
         a[j + 1] = key;
     }
 }

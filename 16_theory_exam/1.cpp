@@ -39,3 +39,11 @@ int main() {
 
     bubble_sort(a, len);
 }
+
+/*
+    Limiton of bubble sort approach;
+    
+    1. if array already sorted even then loop execute (n * n) time, to get rid of this problem i can take a variable whice name is is_swap if the valu is not swap at least one time then loop berak. following this process i can reduce the loop.
+
+    2. in the nested second loop no need to n iteration all of the time(first loop). i can give this control (j < n - i). so that decreases our loopl
+*/
