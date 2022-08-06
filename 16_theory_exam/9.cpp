@@ -11,6 +11,14 @@ class Node {
         }
 };
 
+void print_node(Node *head) {
+    while(head != NULL) {
+        cout << head->value << " ";
+        head = head->next;
+    }
+    cout << endl;
+}
+
 int main() {
     Node *first = new Node(5);
     Node *second = new Node(7);
@@ -35,7 +43,9 @@ int main() {
     }
 
     sum -= temp->value;
-    cout << sum;
+    cout << sum << endl;
+
+    print_node(first);
 }
 
 
