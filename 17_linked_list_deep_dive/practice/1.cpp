@@ -113,17 +113,53 @@ void search_by_value_duplicate(Node* head, int key) {
     if(!is_found) cout << "The search value is not yet in this list" << endl;
 }
 
+int* search_duplicate(Node *head, int key) {
+    int *ar = new int[list_size(head) + 1];
+    int arr_index = 1;
+
+    int position = 1;
+    bool is_found = false;
+
+    while(head != NULL) {
+        if (head->value == key) {
+            is_found = true;
+            ar[arr_index] = position;
+            arr_index++;
+        }
+        head = head->next;
+        position++;
+    }
+
+    if (!is_found) {
+        ar[0] = -1;
+        return ar;
+    }
+    else {
+        ar[0] = arr_index;
+        return ar;
+    }
+}
+
 int main() {
     Node *head = NULL;
 
     insert_at_head(head, 1);
+    insert_at_head(head, 1);
+    insert_at_head(head, 1);
     insert_at_head(head, 2);
     insert_at_head(head, 3);
     insert_at_tail(head, 10);
-    insert_at_specific_position(head, 2, 30);
+    insert_at_tail(head, 1);
+
     print_linked_list(head);
-    search_by_value_duplicate(head, 100);
-    cout << endl;
-    // cout << "position: " << search_by_value_unique(head, 300) << endl;
+
+    int *find = search_duplicate(head, 100);
+    if (*find == -1) cout << "Not found" << endl;
+    else {
+        for (int i = 1; i < *find; i++) {
+            cout << *(find + i) << " ";
+        }
+        cout << endl;
+    }
     cout << "total list length: " << list_size(head) << endl;
 }
