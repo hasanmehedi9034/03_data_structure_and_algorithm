@@ -15,6 +15,7 @@ void print_linked_list(Node *head);
 void insert_at_head(Node* &head, int val);
 void insert_at_tail(Node* &head, int val);
 int list_size(Node *head);
+void insert_at_specific_position(Node* &head, int pos, int value);
 
 void print_linked_list(Node *head) {
     cout << "[";
@@ -64,6 +65,26 @@ int list_size(Node *head) {
     return count;
 }
 
+void insert_at_specific_position(Node* &head, int pos, int value) {
+    Node *new_node = new Node(value);
+
+    if (head == NULL) {
+        cout << "The list is Empty. if you insert a value, the is inserted at head position" << endl;
+        head = new_node;
+        return;
+    }
+
+    Node *temp = head;
+    int count = 1;
+    while(count < pos - 1) {
+        temp = temp->next;
+        count++;
+    }
+
+    new_node->next = temp->next;
+    temp->next = new_node;
+}
+
 int main() {
     Node *head = NULL;
 
@@ -71,6 +92,7 @@ int main() {
     insert_at_head(head, 2);
     insert_at_head(head, 3);
     insert_at_tail(head, 10);
+    insert_at_specific_position(head, 2, 30);
     print_linked_list(head);
     cout << list_size(head);
 }
