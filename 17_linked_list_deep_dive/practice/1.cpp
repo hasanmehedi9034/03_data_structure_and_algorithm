@@ -14,6 +14,7 @@ class Node {
 void print_linked_list(Node *head);
 void insert_at_head(Node* &head, int val);
 void insert_at_tail(Node* &head, int val);
+int list_size(Node *head);
 
 void print_linked_list(Node *head) {
     cout << "[";
@@ -54,6 +55,15 @@ void insert_at_tail(Node* &head, int val) {
     temp->next = new_node;
 }
 
+int list_size(Node *head) {
+    int count = 0;
+    while(head != NULL) {
+        head = head->next;
+        count++;
+    }
+    return count;
+}
+
 int main() {
     Node *head = NULL;
 
@@ -62,4 +72,5 @@ int main() {
     insert_at_head(head, 3);
     insert_at_tail(head, 10);
     print_linked_list(head);
+    cout << list_size(head);
 }
