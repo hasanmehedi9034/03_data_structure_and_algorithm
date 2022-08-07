@@ -16,7 +16,8 @@ void insert_at_head(Node* &head, int val);
 void insert_at_tail(Node* &head, int val);
 int  count_length(Node *head);
 void insert_at_specific_position(Node* &head, int pos, int value);
-int search_by_value_unique(Node* &head, int value);
+int search_by_value_unique(Node* &head, int key);
+void search_by_value_duplicate(Node* &head, int value);
 
 void print_linked_list(Node *head) {
     cout << "Now linked list is : ";
@@ -88,6 +89,38 @@ int search_by_value_unique(Node* &head, int key) {
     return -1;
 }
 
+void search_by_value_duplicate(Node* &head, int key) {
+    int count = 1;
+    int flag = false;
+
+    int size = count_length(head);
+
+    int position[size + 1];
+    int k = 1;
+
+    while(head != NULL) {
+        if (head->value == key) {
+            position[k] = count;
+            k++;
+            flag = true;
+        }
+
+        head = head->next;
+        count++;
+    }
+
+    if (!flag) {
+        cout << "The search value is not yet in this list" << endl;
+    }
+    else {
+        position[0] = k;
+        cout << "The value is found at Position : ";
+        for(int i = 1; i < position[0]; i++) {
+            cout << position[i];
+            if (i < position[0] - 1) cout << ", ";
+        }
+    }
+}
 
 int main() {
 
