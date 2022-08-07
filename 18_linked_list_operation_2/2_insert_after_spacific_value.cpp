@@ -27,6 +27,7 @@ Test search_by_val_dup(Node *head, int key);
 void insert_after_specific_value(Node *head, int key, int value);
 void insert_before_specific_value(Node *head, int key, int value);
 void delete_at_head(Node* &head);
+void delete_at_tail(Node* &head);
 
 void print_linked_list(Node *head) {
     cout << "[";
@@ -179,31 +180,50 @@ void insert_before_specific_value(Node *head, int key, int value) {
 
 void delete_at_head(Node* &head) {
     if (head == NULL) return;
-    
+
     Node *temp = head;
     head = temp->next;
     delete temp;
+}
+
+void delete_at_tail(Node* &head) {
+    if (head == NULL) return;
+    if (head->next == NULL) {
+        delete_at_head(head);
+        return;
+    }
+
+    Node *temp = head;
+    while(temp->next->next != NULL) {
+        temp = temp->next;
+    }
+    Node *del_node = temp->next;
+    temp->next = NULL;
+    delete del_node;
 }
 
 int main() {
     Node *head = NULL;
 
     insert_at_head(head, 1);
-    insert_at_head(head, 1);
-    insert_at_head(head, 1);
-    insert_at_head(head, 2);
-    insert_at_head(head, 3);
-    insert_at_head(head, 3);
-    insert_at_head(head, 1);
-    insert_at_tail(head, 10);
-    insert_at_tail(head, 1);
+    // insert_at_head(head, 1);
+    // insert_at_head(head, 1);
+    // insert_at_head(head, 2);
+    // insert_at_head(head, 3);
+    // insert_at_head(head, 3);
+    // insert_at_head(head, 1);
+    // insert_at_tail(head, 10);
+    // insert_at_tail(head, 1);
 
-    insert_after_specific_value(head, 10, -1);
-    insert_before_specific_value(head, 3, -3);
+    // insert_after_specific_value(head, 10, -1);
+    // insert_before_specific_value(head, 3, -3);
 
     print_linked_list(head);
-    delete_at_head(head);
+    cout << "size: " << list_size(head) << endl;
+    // delete_at_head(head);
+    delete_at_tail(head);
     print_linked_list(head);
+    cout << "size: " << list_size(head) << endl;
 
     // Test T = search_by_val_dup(head, 1);
     // if (T.position[0] == 1) cout << "Not Found" << endl;
