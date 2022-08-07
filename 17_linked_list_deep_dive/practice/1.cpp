@@ -18,6 +18,7 @@ int list_size(Node *head);
 void insert_at_specific_position(Node* &head, int pos, int value);
 int search_by_value_unique(Node* head, int key);
 void search_by_value_duplicate(Node* head, int key);
+int* search_duplicate(Node *head, int key);
 
 void print_linked_list(Node *head) {
     cout << "[";
@@ -153,7 +154,7 @@ int main() {
 
     print_linked_list(head);
 
-    int *find = search_duplicate(head, 100);
+    int *find = search_duplicate(head, 10);
     if (*find == -1) cout << "Not found" << endl;
     else {
         for (int i = 1; i < *find; i++) {
