@@ -16,6 +16,7 @@ void insert_at_head(Node* &head, int val);
 void insert_at_tail(Node* &head, int val);
 int list_size(Node *head);
 void insert_at_specific_position(Node* &head, int pos, int value);
+int search_by_value_unique(Node* head, int key);
 
 void print_linked_list(Node *head) {
     cout << "[";
@@ -85,6 +86,17 @@ void insert_at_specific_position(Node* &head, int pos, int value) {
     temp->next = new_node;
 }
 
+int search_by_value_unique(Node* head, int key) {
+    int position = 1;
+
+    while(head != NULL) {
+        if (head->value == key) return position;
+        head = head->next;
+        position++;
+    }
+    return -1;
+}
+
 int main() {
     Node *head = NULL;
 
@@ -94,5 +106,6 @@ int main() {
     insert_at_tail(head, 10);
     insert_at_specific_position(head, 2, 30);
     print_linked_list(head);
-    cout << list_size(head);
+    cout << "position: " << search_by_value_unique(head, 300) << endl;
+    cout << "total list length: " << list_size(head) << endl;
 }
