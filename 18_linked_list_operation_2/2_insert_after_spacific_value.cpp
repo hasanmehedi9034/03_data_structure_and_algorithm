@@ -29,6 +29,7 @@ void insert_before_specific_value(Node *head, int key, int value);
 void delete_at_head(Node* &head);
 void delete_at_tail(Node* &head);
 void delete_at_specific_position(Node* &head, int pos);
+void delete_value_unique(Node* &head, int key);
 
 void print_linked_list(Node *head) {
     cout << "[";
@@ -226,6 +227,11 @@ void delete_at_specific_position(Node* &head, int pos) {
         head->next = del_node->next;
         delete del_node;
     }
+}
+
+void delete_value_unique(Node* &head, int key) {
+    int pos = search_by_value_unique(head, key);
+    delete_at_specific_position(head, pos);
 }
 
 int main() {
