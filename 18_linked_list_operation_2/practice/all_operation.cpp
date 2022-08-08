@@ -15,17 +15,24 @@ void print_list(Node *head);
 void insert_at_head(Node* &head, int val);
 void insert_at_tail(Node* &head, int val);
 int list_size(Node *head);
+void insert_specific_position(Node* &head, int val, int pos);
 
 void print_list(Node *head)  {
-    cout << "List : [";
-    Node *temp = head;
-    while(temp != NULL) {
-        cout << temp->value;
-        if (temp->next  != NULL) cout << ", ";
-        temp = temp->next;
+
+    if (head == NULL) cout << "No Element in this linked list" << endl;
+    else {
+        cout << "List : [";
+        Node *temp = head;
+
+        while(temp != NULL) {
+            cout << temp->value;
+            if (temp->next  != NULL) cout << ", ";
+            temp = temp->next;
+        }
+        cout << "]" << endl;
+        cout << "List size: " << list_size(head) << endl;
     }
-    cout << "]" << endl;
-    cout << "List size: " << list_size(head) << endl;
+    
 }
 
 void insert_at_head(Node* &head, int val) {
@@ -63,6 +70,25 @@ int list_size(Node *head) {
     return size;
 }
 
+void insert_specific_position(Node* &head, int val, int pos) {
+    int size = list_size(head);
+    if (head == NULL) insert_at_head(head, val);
+    else if (pos == 1) insert_at_head(head, val);
+    else if (size == pos) insert_at_tail(head, val);
+    else {
+        Node *new_node = new Node(val);
+        Node *temp = head;
+
+        int p = 1;
+        while(p < pos - 1) {
+            temp = temp->next;
+            p++;
+        }
+        new_node->next = temp->next;
+        temp->next = new_node;
+    }
+}
+
 int main() {
     Node *head = NULL;
 
@@ -83,18 +109,31 @@ int main() {
             case 1:
                 print_list(head);
                 break;
+
             case 2:
                 cout << "inserted value of the head: ";
                 cin >> val;
                 insert_at_head(head, val);
                 print_list(head);
                 break;
+
             case 3:
                 cout << "inserted value of the tail: ";
                 cin >> val;
                 insert_at_tail(head, val);
                 print_list(head);
                 break;
+
+            case 4:
+                cout << "inserted position: ";
+                int pos;
+                cin >> pos;
+                cout <<"inserted value of position " << pos << ": ";
+                cin >> val;
+                insert_specific_position(head, val, pos);
+                print_list(head);
+                break;
+
             default:
                 print_list(head);
                 break;
