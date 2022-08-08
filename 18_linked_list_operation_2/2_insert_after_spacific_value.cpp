@@ -231,7 +231,10 @@ void delete_at_specific_position(Node* &head, int pos) {
 
 void delete_value_unique(Node* &head, int key) {
     int pos = search_by_value_unique(head, key);
-    delete_at_specific_position(head, pos);
+    if (pos >= 1) delete_at_specific_position(head, pos);
+    else {
+        cout << "Value not found in the linked list" << endl;
+    }
 }
 
 int main() {
