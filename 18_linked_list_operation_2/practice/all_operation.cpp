@@ -21,6 +21,7 @@ int *search_value(Node *head, int key);
 void insert_after_specific_value(Node* &head, int key, int val);
 void delete_head(Node* &head);
 void delete_tail(Node* &head);
+void delete_specific_position(Node* &head, int pos);
 
 void print_list(Node *head)  {
 
@@ -173,6 +174,22 @@ void delete_tail(Node* &head) {
     delete del_node;
 }
 
+void delete_specific_position(Node* &head, int pos) {
+    if (head == NULL) return;
+    else if (pos == 1) delete_head(head);
+    else if (pos == list_size(head)) delete_tail(head);
+    else {
+        Node *temp = head;
+        int position = 1;
+        while(position < pos - 1) {
+            temp = temp->next;
+        }
+        Node *del_node = head->next;
+        temp->next = del_node->next;
+        delete del_node;
+    }
+}
+
 int main() {
     Node *head = NULL;
 
@@ -184,7 +201,8 @@ int main() {
     << "5. search unique value" << endl
     << "6. insert after value" << endl
     << "7. delete head" << endl
-    << "8. delete tail" << endl;
+    << "8. delete tail" << endl
+    << "9. delete specific postion" << endl;
 
     int option_number = 2;
 
@@ -262,6 +280,14 @@ int main() {
                 int is_delete_tail;
                 cin >> is_delete_tail;
                 if (is_delete_tail == 1) delete_tail(head);
+                print_list(head);
+                break;
+
+            case 9:
+                cout << "which position do you want to  delete: ";
+                int del_pos;
+                cin >> del_pos;
+                delete_specific_position(head, del_pos);
                 print_list(head);
                 break;
 
