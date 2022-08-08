@@ -105,6 +105,27 @@ int search_unique_value(Node *head, int key) {
     return -1;
 }
 
+int *search_value(Node *head, int key) {
+    int size = list_size(head);
+    int *arr = new int[size + 1], k = 1;
+    bool is_found = false;
+
+    int pos = 1;
+    while(head != NULL) {
+        if(head->value == key) {
+            arr[k] = pos;
+            k++;
+            is_found = true;
+        }
+        head = head->next;
+        pos++;
+    }
+    if (!is_found) arr[0] = 1;
+    else arr[0] = k;
+
+    return arr;
+}
+
 int main() {
     Node *head = NULL;
 
@@ -153,10 +174,17 @@ int main() {
             case 5:
                 cout << "Enter searched value: ";
                 cin >> val;
-                int position;
-                position = search_unique_value(head, val);
-                if (position == -1) cout << "Not Found in this linked list"<< endl;
-                else cout << "The position of value :" << position << endl;
+
+                int *arr;
+                arr = search_value(head, val);
+                if (*arr == 1) cout << "Not Found in this linked list"<< endl;
+                else {
+                    cout << "indexes: ";
+                    for (int i = 1; i < *arr; i++) {
+                        cout << *(arr + i) << " ";
+                    }
+                    cout << endl;
+                }
                 break;
 
             default:
