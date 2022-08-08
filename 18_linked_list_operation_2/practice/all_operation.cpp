@@ -17,6 +17,8 @@ void insert_at_tail(Node* &head, int val);
 int list_size(Node *head);
 void insert_specific_position(Node* &head, int val, int pos);
 int search_unique_value(Node *head, int key);
+int *search_value(Node *head, int key);
+void insert_after_specific_value(Node* &head, int key, int val);
 
 void print_list(Node *head)  {
 
@@ -75,7 +77,18 @@ void insert_specific_position(Node* &head, int val, int pos) {
     int size = list_size(head);
     if (head == NULL) insert_at_head(head, val);
     else if (pos == 1) insert_at_head(head, val);
-    else if (size == pos) insert_at_tail(head, val);
+    else if (size == pos) {
+        Node *new_node = new Node(val);
+        Node *temp = head;
+        while(temp->next->next != NULL) {
+            temp = temp->next;
+        }
+        new_node->next = temp->next;
+        temp->next = new_node;
+    }
+    else if ((size + 1) == pos) {
+        insert_at_tail(head, val);
+    }
     else {
         Node *new_node = new Node(val);
         Node *temp = head;
@@ -126,6 +139,22 @@ int *search_value(Node *head, int key) {
     return arr;
 }
 
+void insert_after_value(Node* &head, int key, int val) {
+    int *positions = search_value(head, key);
+
+    if (*positions == 1) {
+        cout << "value not found in this list" << endl;
+    }
+    else {
+        int inserted = 0;
+        for(int i = 1; i < *positions; i++) {
+            insert_specific_position(head, val, (*(positions + i) + inserted + 1));
+            cout << "position : " << (*(positions + i) + inserted + 1) << endl;
+            inserted++;
+        }
+    }
+}
+
 int main() {
     Node *head = NULL;
 
@@ -134,7 +163,8 @@ int main() {
     << "2. insert at head" << endl
     << "3. insert at tail" << endl
     << "4. insert at specific position" << endl
-    << "5. search unique value" << endl;
+    << "5. search unique value" << endl
+    << "6. insert after value" << endl;
 
     int option_number = 2;
 
@@ -185,6 +215,18 @@ int main() {
                     }
                     cout << endl;
                 }
+                break;
+
+            case 6:
+                cout << "Enter the value, which after you inserted: ";
+                cin >> val;
+
+                int inserted_value;
+                cout << "Enter the value, which inserted: ";
+                cin >> inserted_value;
+
+                insert_after_value(head, val, inserted_value);
+                print_list(head);
                 break;
 
             default:
