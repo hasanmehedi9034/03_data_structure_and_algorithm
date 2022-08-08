@@ -28,6 +28,7 @@ void insert_after_specific_value(Node *head, int key, int value);
 void insert_before_specific_value(Node *head, int key, int value);
 void delete_at_head(Node* &head);
 void delete_at_tail(Node* &head);
+void delete_at_specific_position(Node* &head, int pos);
 
 void print_linked_list(Node *head) {
     cout << "[";
@@ -202,26 +203,54 @@ void delete_at_tail(Node* &head) {
     delete del_node;
 }
 
+void delete_at_specific_position(Node* &head, int pos) {
+    int size = list_size(head);
+
+    if (head == NULL) return;
+    else if (pos > size) return;
+    else if (pos == 1) {
+        delete_at_head(head);
+        return;
+    }
+    else if(size == pos) {
+        delete_at_tail(head);
+        return;
+    }
+    else {
+        int i = 1;
+        while(i < pos - 1) {
+            head = head->next;
+            i++;
+        } 
+        Node *del_node = head->next;
+        head->next = del_node->next;
+        delete del_node;
+    }
+}
+
 int main() {
     Node *head = NULL;
 
     insert_at_head(head, 1);
-    // insert_at_head(head, 1);
-    // insert_at_head(head, 1);
-    // insert_at_head(head, 2);
-    // insert_at_head(head, 3);
-    // insert_at_head(head, 3);
-    // insert_at_head(head, 1);
-    // insert_at_tail(head, 10);
-    // insert_at_tail(head, 1);
+    insert_at_head(head, 1);
+    insert_at_head(head, 1);
+    insert_at_head(head, 2);
+    insert_at_head(head, 3);
+    insert_at_head(head, 30);
+    insert_at_head(head, 1);
+    insert_at_tail(head, 10);
+    insert_at_tail(head, 1);
 
-    // insert_after_specific_value(head, 10, -1);
-    // insert_before_specific_value(head, 3, -3);
+    insert_after_specific_value(head, 10, -1);
+    insert_before_specific_value(head, 3, -3);
 
     print_linked_list(head);
     cout << "size: " << list_size(head) << endl;
     // delete_at_head(head);
-    delete_at_tail(head);
+    // delete_at_tail(head);
+    // print_linked_list(head);
+    delete_at_specific_position(head, list_size(head));
+    delete_at_specific_position(head, 1);
     print_linked_list(head);
     cout << "size: " << list_size(head) << endl;
 
