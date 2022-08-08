@@ -19,6 +19,8 @@ void insert_specific_position(Node* &head, int val, int pos);
 int search_unique_value(Node *head, int key);
 int *search_value(Node *head, int key);
 void insert_after_specific_value(Node* &head, int key, int val);
+void delete_head(Node* &head);
+void delete_tail(Node* &head);
 
 void print_list(Node *head)  {
 
@@ -149,10 +151,26 @@ void insert_after_value(Node* &head, int key, int val) {
         int inserted = 0;
         for(int i = 1; i < *positions; i++) {
             insert_specific_position(head, val, (*(positions + i) + inserted + 1));
-            cout << "position : " << (*(positions + i) + inserted + 1) << endl;
             inserted++;
         }
     }
+}
+
+void delete_head(Node* &head) {
+    Node *del_node = head;
+    head = del_node->next;
+    delete del_node;
+    return;
+}
+
+void delete_tail(Node* &head) {
+    Node *temp = head;
+    while(temp->next->next != NULL) {
+        temp = temp->next;
+    }
+    Node *del_node = temp->next;
+    temp->next = NULL;
+    delete del_node;
 }
 
 int main() {
@@ -164,7 +182,9 @@ int main() {
     << "3. insert at tail" << endl
     << "4. insert at specific position" << endl
     << "5. search unique value" << endl
-    << "6. insert after value" << endl;
+    << "6. insert after value" << endl
+    << "7. delete head" << endl
+    << "8. delete tail" << endl;
 
     int option_number = 2;
 
@@ -226,6 +246,22 @@ int main() {
                 cin >> inserted_value;
 
                 insert_after_value(head, val, inserted_value);
+                print_list(head);
+                break;
+
+            case 7:
+                cout << "if you want to delete head press(1/0): ";
+                int is_delete_head;
+                cin >> is_delete_head;
+                if (is_delete_head == 1) delete_head(head);
+                print_list(head);
+                break;
+
+            case 8:
+                cout << "if you want to delete tail press(1/0): ";
+                int is_delete_tail;
+                cin >> is_delete_tail;
+                if (is_delete_tail == 1) delete_tail(head);
                 print_list(head);
                 break;
 
