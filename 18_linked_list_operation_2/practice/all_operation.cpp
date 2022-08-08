@@ -16,6 +16,7 @@ void insert_at_head(Node* &head, int val);
 void insert_at_tail(Node* &head, int val);
 int list_size(Node *head);
 void insert_specific_position(Node* &head, int val, int pos);
+int search_unique_value(Node *head, int key);
 
 void print_list(Node *head)  {
 
@@ -89,6 +90,21 @@ void insert_specific_position(Node* &head, int val, int pos) {
     }
 }
 
+int search_unique_value(Node *head, int key) {
+    if (head == NULL) return -1;
+    else {
+        int pos = 1;
+        while(head != NULL) {
+            if (head->value == key) {
+                return pos;
+            } 
+            pos++;
+            head = head->next;
+        }
+    }
+    return -1;
+}
+
 int main() {
     Node *head = NULL;
 
@@ -96,8 +112,8 @@ int main() {
     << "1. print list" << endl
     << "2. insert at head" << endl
     << "3. insert at tail" << endl
-    << "4. insert at specific position" << endl;
-
+    << "4. insert at specific position" << endl
+    << "5. search unique value" << endl;
 
     int option_number = 2;
 
@@ -132,6 +148,15 @@ int main() {
                 cin >> val;
                 insert_specific_position(head, val, pos);
                 print_list(head);
+                break;
+
+            case 5:
+                cout << "Enter searched value: ";
+                cin >> val;
+                int position;
+                position = search_unique_value(head, val);
+                if (position == -1) cout << "Not Found in this linked list"<< endl;
+                else cout << "The position of value :" << position << endl;
                 break;
 
             default:
