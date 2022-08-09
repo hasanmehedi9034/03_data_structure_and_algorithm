@@ -22,6 +22,8 @@ void insert_after_specific_value(Node* &head, int key, int val);
 void delete_head(Node* &head);
 void delete_tail(Node* &head);
 void delete_specific_position(Node* &head, int pos);
+void delete_single_value(Node* &head, int key);
+void delete_multiple_value(Node* &head, int key);
 
 void print_list(Node *head)  {
 
@@ -175,18 +177,32 @@ void delete_tail(Node* &head) {
 }
 
 void delete_specific_position(Node* &head, int pos) {
+    int size = list_size(head);
     if (head == NULL) return;
     else if (pos == 1) delete_head(head);
-    else if (pos == list_size(head)) delete_tail(head);
+    else if (pos == size) delete_tail(head);
     else {
         Node *temp = head;
         int position = 1;
         while(position < pos - 1) {
             temp = temp->next;
+            position++;
         }
-        Node *del_node = head->next;
+        Node *del_node = temp->next;
         temp->next = del_node->next;
         delete del_node;
+    }
+}
+
+void delete_single_value(Node* &head, int key) {
+    int pos = search_unique_value(head, key);
+    delete_specific_position(head, pos);
+}
+
+void delete_multiple_value(Node* &head, int key) {
+    while(search_unique_value(head, key) != -1){
+        int pos = search_unique_value(head, key);
+        delete_specific_position(head, pos);
     }
 }
 
@@ -202,7 +218,9 @@ int main() {
     << "6. insert after value" << endl
     << "7. delete head" << endl
     << "8. delete tail" << endl
-    << "9. delete specific postion" << endl;
+    << "9. delete specific postion" << endl
+    << "10. delete specific single value" << endl
+    << "11. delete specific multiple values" << endl;
 
     int option_number = 2;
 
@@ -247,7 +265,7 @@ int main() {
                 arr = search_value(head, val);
                 if (*arr == 1) cout << "Not Found in this linked list"<< endl;
                 else {
-                    cout << "indexes: ";
+                    cout << "positions of " << val << ": ";
                     for (int i = 1; i < *arr; i++) {
                         cout << *(arr + i) << " ";
                     }
@@ -288,6 +306,22 @@ int main() {
                 int del_pos;
                 cin >> del_pos;
                 delete_specific_position(head, del_pos);
+                print_list(head);
+                break;
+
+            case 10:
+                cout << "which value do you want to  delete: ";
+                int del_value;
+                cin >> del_value;
+                delete_single_value(head, del_value);
+                print_list(head);
+                break;
+
+            case 11:
+                cout << "which values(multiple) do you want to  delete: ";
+                int del_values;
+                cin >> del_values;
+                delete_multiple_value(head, del_values);
                 print_list(head);
                 break;
 
