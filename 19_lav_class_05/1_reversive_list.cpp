@@ -25,6 +25,7 @@ void delete_specific_position(Node* &head, int pos);
 void delete_single_value(Node* &head, int key);
 void delete_multiple_value(Node* &head, int key);
 Node *reverse_non_recursive(Node* &head);
+Node *reverse_recursive(Node* &head);
 
 void print_list(Node *head)  {
     if (head == NULL) cout << "No Element in this linked list" << endl;
@@ -224,6 +225,24 @@ Node *reverse_non_recursive(Node* &head) {
     return prev;
 }
 
+Node *reverse_recursive(Node* &head) {
+    if (head == NULL || head == NULL) {
+        if (head == NULL) cout << "List is empty" << endl;
+        return;
+    }
+    // BASE CALL
+    if(head->next == NULL) {
+        return head;
+    }
+
+    // RECURSIVE CALL
+    Node *new_head = reverse_recursive(head->next);
+    head->next->next = head;
+    head->next = NULL;
+
+    return new_head;
+}
+
 int main() {
     Node *head = NULL;
 
@@ -239,7 +258,8 @@ int main() {
     << "9. delete specific postion" << endl
     << "10. delete specific single value" << endl
     << "11. delete specific multiple values" << endl
-    << "12. reversal of list (non-recursive)" << endl;
+    << "12. reversal of list (non-recursive)" << endl
+    << "13. reversal of list (ecursive)" << endl;
 
     int option_number = 2;
 
@@ -346,6 +366,11 @@ int main() {
 
             case 12:
                 head = reverse_non_recursive(head);
+                print_list(head);
+                break;
+
+            case 13:
+                head = reverse_recursive(head);
                 print_list(head);
                 break;
 
