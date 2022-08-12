@@ -211,7 +211,10 @@ Node *reverse_non_recursive(Node* &head) {
     Node *prev = NULL;
     Node *current = head;
 
-    if (head == NULL) return head;
+    if (head == NULL) {
+        cout << "The linked list is empty" << endl;
+        return head;
+    } 
 
     Node *next = head->next;
     while(true) {
