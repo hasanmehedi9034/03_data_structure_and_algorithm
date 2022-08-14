@@ -25,6 +25,9 @@ void delete_specific_position(Node* &head, int pos);
 void delete_single_value(Node* &head, int key);
 void delete_multiple_value(Node* &head, int key);
 int find_mid(Node* &head);
+void make_cycle(Node* &head, int pos);
+bool detect_cycle(Node* &head);
+void remove_cycle(Node* &head);
 
 void print_list(Node *head)  {
 
@@ -222,6 +225,58 @@ int find_mid(Node* &head) {
     return slow->value;
 }
 
+void make_cycle(Node* &head, int pos) {
+    Node* temp = head;
+    Node* start_node;
+    int count = 1;
+
+    while(temp->next != NULL) {
+        if (count == pos) start_node = temp;
+
+        temp = temp->next;
+        count++;
+    }
+    temp->next = start_node;
+}
+
+bool detect_cycle(Node* &head) {
+    Node* slow = head;
+    Node* fast = head;
+
+    while(fast != NULL) {
+        slow = slow->next;
+        fast = fast->next;
+
+        if (slow ->next == fast->next) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void remove_cycle(Node* &head) {
+    Node* slow = head;
+    Node* fast = head;
+
+    // step 1: fast = slow
+    do {
+        slow = slow->next;
+        fast = fast->next->next;
+    }while(slow != fast);
+
+    // step 2: re initialization of fast
+    fast = head;
+
+    // step 3: fast->nest == slow->next
+    while(fast->next != slow->next) {
+        fast = fast->next;
+        slow = slow->next;
+    }
+
+    // step 4
+    slow->next = NULL;
+}
+
 int main() {
     Node *head = NULL;
 
@@ -236,7 +291,11 @@ int main() {
     << "8. delete tail" << endl
     << "9. delete specific postion" << endl
     << "10. delete specific single value" << endl
-    << "11. delete specific multiple values" << endl;
+    << "11. delete specific multiple values" << endl
+    << "12. Mid value" << endl
+    << "13. Make cycle" << endl
+    << "14. detect cycle" << endl
+    << "15. remove cycle(if any)" << endl;
 
     int option_number = 2;
 
@@ -345,6 +404,26 @@ int main() {
                 cout << "Mid value is : " << find_mid(head) << endl;
                 print_list(head);
                 break; 
+
+            case 13:
+                int poss;
+                cout << "Enter the position to make cycle: ";
+                cin >> poss;
+                make_cycle(head, poss);
+                print_list(head);
+                break;
+            
+            case 14:
+                bool is_cycle = detect_cycle(head);
+                if(is_cycle) cout << "yes the list have a cycle" << endl;
+                else cout << "No, the list havent a cycle" << endl;
+                break;
+
+            case 15:
+                if(detect_cycle(head)) remove_cycle(head);
+                else {
+                    cout << "the list have not cycle" << endl;
+                }
 
             default:
                 print_list(head);
