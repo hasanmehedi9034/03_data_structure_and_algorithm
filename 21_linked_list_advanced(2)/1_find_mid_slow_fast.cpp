@@ -431,3 +431,14 @@ int main() {
         }
     }
 }
+
+/*
+for practice
+
+1. reverse linked list using while loop
+2. reverse linked list using recursive
+3. cycle make
+4. Mid position identify (slow-fast)
+
+
+*/
