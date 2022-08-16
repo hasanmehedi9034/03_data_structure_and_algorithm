@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "MYSTACK.h"
+#include "MYSTACKs.h"
 
 using namespace std;
 
@@ -11,5 +11,8 @@ int main() {
     st.push(3);
     st.push(0);
 
-    cout << st.size();
+    while(!st.is_empty()) {
+        cout << st.top_val() << endl;
+        st.pop();
+    }
 }
