@@ -47,7 +47,6 @@ void insert_at_head(Node* &head, int val) {
 }
 
 void insert_at_tail(Node* &head, int val) {
-
     Node* new_node = new Node(val);
 
     if (head == NULL) {
@@ -63,6 +62,29 @@ void insert_at_tail(Node* &head, int val) {
     temp->next = new_node;
 }
 
+Node* reverse(Node* head, int k) {
+    if (!head) return NULL;
+        
+    Node* current = head;
+    Node* next = NULL;
+    Node* prev = NULL;
+    int count = 0;
+  
+    while (current != NULL && count < k) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+        count++;
+    }
+  
+    if (next != NULL) {
+        head->next = reverse(next, k);
+    } 
+        
+    return prev;
+}
+
 int main() {
     int n;
     cin >> n;
@@ -75,6 +97,12 @@ int main() {
 
     Node* head = NULL;
 
+    for (int i = 0; i < n; i++) {
+        insert_at_tail(head, a[i]);
+    }
 
+    head = reverse(head, pos);
+
+    print_list(head);
 
 }
