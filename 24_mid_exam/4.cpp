@@ -4,7 +4,7 @@ using namespace std;
 void inpute_array_2D(int *a, int row, int col) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
-            cin >> *(a + (col * i) + j);
+            cin >> *(a + (row * j) + i);
         }
     }
 }
@@ -12,7 +12,7 @@ void inpute_array_2D(int *a, int row, int col) {
 void print_array_2D (int *a, int row, int col) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
-            cout << *(a + (row * i) + j) << " ";
+            cout << *(a + (row * j) + i) << " ";
         }
         cout << endl;
     }

@@ -1,12 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void input_array(int a[], int n) {
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-}
-
 class Node{
     public:
         int value;
@@ -60,13 +54,12 @@ int main() {
     int n;
     cin >> n;
 
-    int a[n];
-    input_array(a, n);
-
     Node* head = NULL;
 
     for (int i = 0; i < n; i++) {
-        insert_at_tail(head, a[i]);
+        int value;
+        cin >> value;
+        insert_at_tail(head, value);
     }
 
     print_list(head);

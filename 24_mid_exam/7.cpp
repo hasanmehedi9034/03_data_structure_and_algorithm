@@ -80,6 +80,7 @@ Node* reverse(Node* head, int k) {
   
     if (next != NULL) {
         head->next = reverse(next, k);
+        // head = reverse(head->next, k);
     } 
         
     return prev;
