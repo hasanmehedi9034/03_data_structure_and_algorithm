@@ -14,6 +14,41 @@ class treeNode {
         }
 };
 
+void print_tree(treeNode* root, int level);
+void space_print(int level);
+
+void print_tree(treeNode* root, int level) {
+    if (root == NULL) return; // tree empty
+
+    if (root->leftChild == NULL && root->rightChild == NULL) { // 1
+        cout << root->data << endl;
+        return;
+    }
+    else {
+        cout << endl;
+        space_print(level);
+        cout << "Root: "  << root->data << endl;
+    }
+
+    if (root->leftChild != NULL) {
+        space_print(level);
+        cout << "Left: ";
+        print_tree(root->leftChild, level + 1);
+    }
+
+    if (root->rightChild != NULL) {
+        space_print(level);
+        cout << "Right: ";
+        print_tree(root->rightChild, level + 1);
+    }
+}
+
+void space_print(int level) {
+    for (int i = 0; i < level; i++) {
+        cout << "    ";
+    }
+}
+
 int main() {
     int n;
     cin >> n;
@@ -29,6 +64,10 @@ int main() {
 
         allNodes[i]->data = value;
 
+        // if (left > -1 || right  > n - 1) {
+        //     cout << "Invalid index" << endl;
+        //     break;
+        // }
         if (left != -1) {
             allNodes[i]->leftChild = allNodes[left];
         }
@@ -37,6 +76,8 @@ int main() {
             allNodes[i]->rightChild = allNodes[right];
         }
     }
+
+    print_tree(allNodes[0], 0);
 }
 
 
