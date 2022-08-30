@@ -16,6 +16,7 @@ class treeNode {
 
 void print_tree(treeNode* root, int level);
 void space_print(int level);
+void inOrder(treeNode* root, string &chk);
 
 void print_tree(treeNode* root, int level) {
     if (root == NULL) return; // tree empty
@@ -24,7 +25,7 @@ void print_tree(treeNode* root, int level) {
         cout << root->data << endl;
         return;
     }
-    else {
+    else { // 2
         cout << endl;
         space_print(level);
         cout << "Root: "  << root->data << endl;
@@ -49,10 +50,20 @@ void space_print(int level) {
     }
 }
 
+void inOrder(treeNode* root, string &chk){
+    if (root == NULL) return;
+
+    inOrder(root->leftChild, chk);
+
+    chk += to_string(root->data);
+
+    inOrder(root->rightChild, chk);
+}
+
 int main() {
     int n;
     cin >> n;
-
+    
     treeNode* allNodes[n];
     for (int i = 0; i < n; i++) {
         allNodes[i] = new treeNode(-1);
@@ -64,10 +75,10 @@ int main() {
 
         allNodes[i]->data = value;
 
-        // if (left > -1 || right  > n - 1) {
-        //     cout << "Invalid index" << endl;
-        //     break;
-        // }
+        if (left > n -1 || right  > n - 1) {
+            cout << "Invalid index" << endl;
+            break;
+        }
         if (left != -1) {
             allNodes[i]->leftChild = allNodes[left];
         }
@@ -77,8 +88,13 @@ int main() {
         }
     }
 
-    print_tree(allNodes[0], 0);
+    // print_tree(allNodes[0], 0);
+    string inorder = "";
+    inOrder(allNodes[0], inorder);
+
+    cout << inorder << endl;
 }
+
 
 
 /*
