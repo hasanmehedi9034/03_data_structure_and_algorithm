@@ -16,15 +16,11 @@ class treeNode {
 
 void printTree(treeNode* root, int level);
 void spacePrint(int levet);
-void inOrder(treeNode* root, string &chk);
-void preOrder(treeNode* root, string &chk);
-void postOrder(treeNode* root, string &chk);
-
 
 void printTree(treeNode* root, int level) {
     if (root == NULL) return;
 
-    if (root->leftChild == NULL && root->rightChild == NULL) {
+    if (root->rightChild == NULL && root->leftChild == NULL) {
         cout << root->data << endl;
     }
     else {
@@ -38,11 +34,10 @@ void printTree(treeNode* root, int level) {
         cout << "Left: ";
         printTree(root->leftChild, level + 1);
     }
-    
 
     if (root->rightChild != NULL) {
         spacePrint(level);
-        cout << "Right: ";
+        cout <<  "Right: ";
         printTree(root->rightChild, level + 1);
     }
 }
@@ -51,34 +46,6 @@ void spacePrint(int level) {
     for (int i = 0; i < level; i++) {
         cout << "    ";
     }
-}
-
-void inOrder(treeNode* root, string &chk) {
-    if (root == NULL) return;
-
-    inOrder(root->leftChild, chk);
-
-    chk += to_string(root->data);
-
-    inOrder(root->rightChild, chk);
-}
-
-void preOrder(treeNode* root, string &chk) {
-    if (root == NULL) return;
-
-    chk += to_string(root->data);
-
-    preOrder(root->leftChild, chk);
-    preOrder(root->rightChild, chk);
-}
-
-void postOrder(treeNode* root, string &chk) {
-    if (root == NULL) return;
-
-    postOrder(root->leftChild, chk);
-    postOrder(root->rightChild, chk);
-
-    chk += to_string(root->data);
 }
 
 int main(){
@@ -106,19 +73,7 @@ int main(){
         }
     }
 
-    // printTree(allNodes[0], 0);
-
-    string inorder_chk = "";
-    inOrder(allNodes[0], inorder_chk);
-    cout << "In order Traversal: " << inorder_chk << endl;
-
-    string preorder_chk = "";
-    preOrder(allNodes[0], preorder_chk);
-    cout << "Pre Order traversal: " << preorder_chk << endl;
-
-    string postorder_chk = "";
-    postOrder(allNodes[0], postorder_chk);
-    cout << "Post Order traversal: " << postorder_chk << endl;
+    printTree(allNodes[0], 0);
 }
 
 /*
