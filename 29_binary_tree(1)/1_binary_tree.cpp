@@ -17,6 +17,8 @@ class treeNode {
 void print_tree(treeNode* root, int level);
 void space_print(int level);
 void inOrder(treeNode* root, string &chk);
+void preOrder(treeNode* root, string &chk);
+void postOrder(treeNode* root, string &chk);
 
 void print_tree(treeNode* root, int level) {
     if (root == NULL) return; // tree empty
@@ -58,6 +60,23 @@ void inOrder(treeNode* root, string &chk){
     chk += to_string(root->data);
 
     inOrder(root->rightChild, chk);
+}
+
+void preOrder(treeNode* root, string &chk) {
+    if (root == NULL) return;
+
+    chk += to_string(root->data);
+
+    preOrder(root->leftChild, chk);
+    preOrder(root->rightChild, chk);
+}
+
+void postOrder(treeNode* root, string &chk) {
+    if (root == NULL) return;
+
+    preOrder(root->leftChild, chk);
+    preOrder(root->rightChild, chk);
+    chk += to_string(root->data);
 }
 
 int main() {
