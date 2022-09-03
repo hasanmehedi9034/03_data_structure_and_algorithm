@@ -109,6 +109,83 @@ void level_order_traversal(treeNode* root, string &chk) {
     }
 }
 
+int max_in_kth_level(treeNode* root, int level) {
+    if (root == NULL) return  -1;
+
+    int l = 0;
+
+    int max = -99999;
+
+    queue <treeNode *> q;
+
+    q.push(root);
+    q.push(NULL);
+
+    while(!q.empty()) {
+        treeNode* chkNode = q.front();
+        q.pop();
+
+        if (chkNode != NULL) {
+            if (l == level) {
+                if (max < chkNode->data) {
+                    max = chkNode->data;
+                }
+            }
+            if (chkNode->leftChild != NULL) {
+                q.push(chkNode->leftChild);
+            }
+            if (chkNode->rightChild != NULL) {
+                q.push(chkNode->rightChild);
+            }
+        }
+        else {
+            if (!q.empty()) q.push(NULL);
+            l++;
+        }
+    }
+
+    return max;
+}
+
+int sum_of_kth_level(treeNode* root, int level){
+    if (root == 0) return -1;
+
+    int sum = 0;
+    int l = 0;
+
+    queue <treeNode *> q;
+
+    q.push(root);
+    q.push(NULL);
+
+    while(!q.empty()) {
+        treeNode* current_node = q.front();
+
+        q.pop();
+
+        if (current_node != NULL) { 
+            if (l == level) {
+                sum += current_node->data;
+            }
+
+            if (current_node->leftChild != NULL) {
+                q.push(current_node->leftChild);
+            }
+            if (current_node->rightChild != NULL) {
+                q.push(current_node->rightChild);
+            }
+        }
+        else {
+            if (!q.empty()) {
+                q.push(NULL);
+            }
+            l++;
+        }
+    }
+
+    return sum;
+}
+
 int main() {
     int n;
     cin >> n;
@@ -148,9 +225,13 @@ int main() {
     // postOrder_traversal(allNodes[0], postorder_chk);
     // cout << "postOrder Traversal: " << postorder_chk << endl;
 
-    string chk_levelOrder = "";
-    level_order_traversal(allNodes[0], chk_levelOrder);
-    cout << "Level order traversal: " << chk_levelOrder << endl;
+    // string chk_levelOrder = "";
+    // level_order_traversal(allNodes[0], chk_levelOrder);
+    // cout << "Level order traversal: " << chk_levelOrder << endl;
+
+    // cout <<  "max in kth level: " << max_in_kth_level(allNodes[0], 2) << endl;
+
+    // cout <<  "sum in kth level: " << sum_of_kth_level(allNodes[0], 1) << endl;
 }
 
 /*
