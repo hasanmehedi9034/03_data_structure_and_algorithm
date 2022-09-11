@@ -70,13 +70,14 @@ int main() {
     // cout << st.Top() << endl; 
 
     Stack <Person> st;
-    Person a ("Mehedi", 200.5);
-    Person b ("Parvez", 201.5);
-    Person c ("Eti", 202.5);
+    // Person a ("Mehedi", 200.5);
+    // Person b ("Parvez", 201.5);
+    // Person c ("Eti", 202.5);
 
-    st.push(a);
-    st.push(b);
-    st.push(c);
+    Person a;
+    // st.push(a);
+    // st.push(b);
+    // st.push(c);
 
     // while(!st.empty()) {
     //     Person print_object = st.pop();

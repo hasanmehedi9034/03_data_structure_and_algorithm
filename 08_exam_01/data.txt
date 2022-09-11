@@ -1,74 +1,37 @@
 12
 170
-chicken
+Chicken Soup 1:2
 260
 171
-chicken
+Chicken Corn Soup 1:2
 200
 172
-thai
+Thai Special Soup 1:2
 300
 260
-chicken
+Chicken Fried Rice 1:2
 250
 261
-egg
+Egg Fried Rice 1:2
 230
 262
-prawn
+Prawn Fried Rice 1:2
 300
 310
-beef
+Beef Mutton Kabab 1:1
 150
 311
-chicken
+Chicken Grill 1:4
 340
 450
-chicken
+Chicken Curry 1:3
 550
 451
-beef
+Beef Special Curry 1:3
 760
 452
-chicken
+Chicken Sizzling 1:3
 710
 453
-beef
-970
-12
-170
-chicken Soup 1:2
-260
-171
-chicken
-200
-172
-thai
-300
-260
-chicken
-250
-261
-egg
-230
-262
-prawn
-300
-310
-beef
-150
-311
-chicken
-340
-450
-chicken
-550
-451
-beef
-760
-452
-chicken
-710
-453
-beef
+Beef Sizzling 1:3
 970

@@ -15,5 +15,5 @@ int main() {
     int a[] = {1, 2, 9, 11, 17, 24, 26, 31, 320, 45};
     int len_a = sizeof(a) / sizeof(a[0]);
 
-    cout << binary(a, 0, len_a, 45);
+    cout << binary(a, 0, len_a, 6);
 }

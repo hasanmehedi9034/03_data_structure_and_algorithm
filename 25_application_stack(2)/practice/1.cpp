@@ -88,4 +88,5 @@ int main() {
     string prefix_value = infix_to_prefix("4+(1*2)+3+5");
 
     cout << prefix_evaluation(prefix_value) << endl;
+    cout << prefix_evaluation("+9*3/84") << endl;
 }
