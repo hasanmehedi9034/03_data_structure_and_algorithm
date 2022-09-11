@@ -42,6 +42,5 @@ void solution(TreeNode* root, string s) {
 
 int main() {
     // cout << convert("101") << endl;
-    string s = "";
     
 }
