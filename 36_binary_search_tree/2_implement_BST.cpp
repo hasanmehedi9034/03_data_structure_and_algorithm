@@ -59,6 +59,30 @@ treeNode* searchBST(treeNode* root, int value) {
     } 
 }
 
+treeNode* deletionBST(treeNode* root, int value) {
+    if (value < root->data) {
+        root->leftChild = deletionBST(root->leftChild, value);
+    }
+    else if (value > root->data) {
+        root->rightChild = deletionBST(root->rightChild, value);
+    }
+    else {
+        if (root->leftChild == NULL) {
+            treeNode* temp = root->rightChild;
+            free(root);
+            return temp;
+        }
+        else if (root->rightChild == NULL) {
+            treeNode* temp = root->leftChild;
+            free(root);
+            return temp;
+        }
+        else {
+            // treeNode* temp = 
+        }
+    }
+}
+
 int main() {
     int n;
     cin >> n;
