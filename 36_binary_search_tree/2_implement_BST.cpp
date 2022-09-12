@@ -59,6 +59,15 @@ treeNode* searchBST(treeNode* root, int value) {
     } 
 }
 
+treeNode* inorderSucc(treeNode* root) {
+    treeNode* current_node = root;
+
+    while(current_node->leftChild != NULL) {
+        current_node = current_node->leftChild;
+    }
+    return current_node;
+}
+
 treeNode* deletionBST(treeNode* root, int value) {
     if (value < root->data) {
         root->leftChild = deletionBST(root->leftChild, value);
@@ -78,9 +87,12 @@ treeNode* deletionBST(treeNode* root, int value) {
             return temp;
         }
         else {
-            // treeNode* temp = 
+            treeNode* temp = inorderSucc(root->rightChild);
+            root->data = temp->data;
+            root->rightChild = deletionBST(root->rightChild, temp->data);
         }
     }
+    return root;
 }
 
 int main() {
