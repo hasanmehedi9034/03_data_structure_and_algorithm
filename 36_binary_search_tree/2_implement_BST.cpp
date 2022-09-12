@@ -45,9 +45,18 @@ void inOrder(treeNode* root, string &chk) {
 treeNode* searchBST(treeNode* root, int value) {
     if (root == NULL) return NULL;
 
-    if (root->data == value) return root;
-    else if (value < root->data) return searchBST(root->leftChild, value);
-    else return searchBST(root->rightChild, value);
+    if (root->data == value) {
+        cout << root->data;
+        return root;
+    } 
+    else if (value < root->data) {
+        cout << root->data << "->";
+        return searchBST(root->leftChild, value);
+    }
+    else {
+        cout << root->data << "->";
+        return searchBST(root->rightChild, value);
+    } 
 }
 
 int main() {
@@ -70,10 +79,10 @@ int main() {
     int key;
     cin >> key;
     if (searchBST(root, key) == NULL) {
-        cout << "Not found" << endl;
+        cout << endl << "Not found" << endl;
     }
     else {
-        cout << "value founded" << endl;
+        cout << endl << "value founded" << endl;
     }
 }
 
