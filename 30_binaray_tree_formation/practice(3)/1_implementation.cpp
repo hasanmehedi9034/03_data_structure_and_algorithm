@@ -14,6 +14,11 @@ class treeNode {
         }
 };
 
+void print_tree(treeNode* root, int level);
+void spacePrint(int level);
+void inOrder(treeNode* root, string &chk);
+void preOrder(treeNode* root, string &chk);
+ 
 void spacePrint(int level) {
     for (int i = 0; i < level; i++) {
         cout << "   ";
@@ -46,7 +51,6 @@ void print_tree(treeNode* root, int level) {
     }
 }
 
-
 void print_tree2(treeNode* root, int level) {
     if (root == NULL) return;
 
@@ -65,6 +69,22 @@ void print_tree2(treeNode* root, int level) {
 
     cout << "Right: ";
     print_tree(root->rightChild, level + 1);
+}
+
+void inOrder(treeNode* root, string &chk) {
+    if (root == NULL) return;
+
+    inOrder(root->leftChild, chk);
+    chk += to_string(root->data);
+    inOrder(root->rightChild, chk);
+}
+
+void preOrder(treeNode* root, string &chk) {
+    if (root == NULL) return;
+
+    chk += to_string(root->data);
+    preOrder(root->leftChild, chk);
+    preOrder(root->rightChild, chk);
 }
 
 int main() {
@@ -90,7 +110,11 @@ int main() {
         }
     }
 
-    print_tree2(allNodes[0], 0);
+    // print_tree2(allNodes[0], 0);
+
+    string inorder_print = "";
+    inOrder(allNodes[0], inorder_print);
+    cout << inorder_print << endl;
 }
 
 /*
