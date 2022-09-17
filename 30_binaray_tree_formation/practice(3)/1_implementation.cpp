@@ -21,9 +21,7 @@ void spacePrint(int level) {
 }
 
 void print_tree(treeNode* root, int level) {
-    if (root == NULL) {
-        return;
-    }
+    if (root == NULL) return;
 
     if (root->leftChild == NULL && root->rightChild == NULL) {
         cout << root->data << endl;
@@ -46,6 +44,27 @@ void print_tree(treeNode* root, int level) {
         cout << "Right: ";
         print_tree(root->rightChild, level + 1);
     }
+}
+
+
+void print_tree2(treeNode* root, int level) {
+    if (root == NULL) return;
+
+    if (root->leftChild == NULL && root->rightChild == NULL) {
+        cout << root->data;
+        return;
+    }
+    else {
+        cout << endl;
+        spacePrint(level);
+        cout << "Root: " << root->data << endl;
+    }
+
+    cout << "Left: ";
+    print_tree(root->leftChild, level + 1);
+
+    cout << "Right: ";
+    print_tree(root->rightChild, level + 1);
 }
 
 int main() {
@@ -71,7 +90,7 @@ int main() {
         }
     }
 
-    print_tree(allNodes[0], 0);
+    print_tree2(allNodes[0], 0);
 }
 
 /*
