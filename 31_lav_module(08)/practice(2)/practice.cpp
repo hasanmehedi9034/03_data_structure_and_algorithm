@@ -106,6 +106,54 @@ treeNode* constructPreIn(int preOrder[], int inOrder[], int start, int end) {
     return current_node;
 }
 
+void leftNonLeaves(treeNode* root) {
+    if (root == NULL) return;
+
+    if (root->leftChild != NULL) {
+        cout << root->data << " ";
+        leftNonLeaves(root->leftChild);
+    }
+    else if(root->rightChild != NULL) {
+        cout << root->data << " ";
+        leftNonLeaves(root->rightChild);
+    }
+}
+
+void rightNonLeaves(treeNode* root) {
+    if (root == NULL) return;
+
+    if (root->rightChild != NULL) {
+        cout << root->data << " ";
+        rightNonLeaves(root->rightChild);
+    }
+    else if (root->leftChild != NULL) {
+        cout << root->data << " ";
+        rightNonLeaves(root->leftChild);
+    }
+}
+
+void leaves(treeNode* root) {
+    if (root == NULL) return;
+
+    if (root->leftChild == NULL && root->rightChild == NULL) {
+        cout << root->data << " ";
+    }
+
+    leaves(root->leftChild);
+    leaves(root->rightChild);
+}
+
+void boundaryTraversal(treeNode* root) {
+    if (root == NULL) return;
+
+    cout << root->data << " ";
+
+    leftNonLeaves(root->leftChild);
+    leaves(root->leftChild);
+    leaves(root->rightChild);
+    rightNonLeaves(root->rightChild);
+}
+
 int main() {
     int n;
     cin >> n;
@@ -120,8 +168,8 @@ int main() {
 
     treeNode* root = constructPreIn(preOrder, inOrder, 0, n - 1);
 
-    print_tree(root, 0);
+    // print_tree(root, 0);
     // levelOrderTravesal(root);
 
-
+    boundaryTraversal(root);
 }
