@@ -168,10 +168,12 @@ int main() {
 
     treeNode* root = buildTreePreIn(preOrderArray, inOrderArray, 0, n - 1);
 
-    string preO = "";
-    preOrder(root, preO);
+    // string preO = "";
+    // preOrder(root, preO);
 
-    cout << preO << endl;
+    // cout << preO << endl;
+
+    print_tree(root, 0);
 }
 
 /*
