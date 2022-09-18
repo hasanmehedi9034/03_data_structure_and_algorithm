@@ -19,6 +19,8 @@ void spacePrint(int level);
 void inOrder(treeNode* root, string &chk);
 void preOrder(treeNode* root, string &chk);
 void levelOrderTravesal(treeNode* root, string &chk);
+treeNode* buildTreePreIn(int preOrder[], int inOrder[], int start, int end);
+int searcInorder(int inOrder[], int current, int start, int end);
  
 void spacePrint(int level) {
     for (int i = 0; i < level; i++) {
@@ -120,7 +122,34 @@ void levelOrderTravesal(treeNode* root) {
     cout << endl << "Total Level: " << level;
 }
 
+treeNode* buildTreePreIn(int preOrder[], int inOrder[], int start, int end) {
+    static int id = 0;
 
+    int current = preOrder[id];
+    treeNode* newNode = new treeNode(current);
+
+    id++;
+
+    if (start == end) {
+        return newNode;
+    }
+
+    int pos = searcInorder(inOrder, current, start, end);
+
+    newNode->leftChild = buildTreePreIn(preOrder, inOrder, start, pos - 1);
+    newNode->rightChild = buildTreePreIn(preOrder, inOrder, pos + 1, end);
+
+    return newNode;
+}
+
+int searcInorder(int inOrder[], int current, int start, int end) {
+    for (int i = start; i <= end; i++) {
+        if (inOrder[i] == current) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 
 
@@ -128,35 +157,30 @@ int main() {
     int n;
     cin >> n;
 
-    treeNode* allNodes[n];
-    for (int i = 0; i < n; i++) {
-        allNodes[i] = new treeNode(-1);
-    }
+    int preOrderArray[n], inOrderArray[n];
 
     for (int i = 0; i < n; i++) {
-        int value, left, right;
-        cin >> value >> left >> right;
-
-        allNodes[i]->data = value;
-
-        if (left != -1) {
-            allNodes[i]->leftChild = allNodes[left];
-        }
-        if (right != -1) {
-            allNodes[i]->rightChild = allNodes[right];
-        }
+        cin >> preOrderArray[i];
+    }
+    for (int i = 0; i < n; i++) {
+        cin >> inOrderArray[i];
     }
 
-    // print_tree2(allNodes[0], 0);
+    treeNode* root = buildTreePreIn(preOrderArray, inOrderArray, 0, n - 1);
 
-    // string inorder_print = "";
-    // inOrder(allNodes[0], inorder_print);
-    // cout << inorder_print << endl;
+    string preO = "";
+    preOrder(root, preO);
 
-    levelOrderTravesal(allNodes[0]);
+    cout << preO << endl;
 }
 
 /*
+9
+0 1 3 4 2 5 7 8 6
+3 1 4 0 7 5 8 2 6
+
+
+
 
 9
 0 1 2
