@@ -26,6 +26,13 @@ void printArray(int a[], int n) {
     cout << endl;
 }
 
+void heapSort(int array[], int n) {
+    for (int i = n - 1; i >= 0; i--) {
+        swap(array[0], array[i]);
+        heapify(array, i - 1, 0);
+    }
+}
+
 int main() {
     int n;
     cin >> n;
@@ -39,6 +46,8 @@ int main() {
     for (int i = nonLeafStart; i >= 0; i--) {
         heapify(array, n, i);
     }
+
+    heapSort(array, n);
 
     printArray(array, n);
 }
