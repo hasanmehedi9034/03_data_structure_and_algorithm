@@ -224,7 +224,11 @@ treeNode* deletionBST(treeNode* root, int value) {
         root->rightChild = deletionBST(root->rightChild, value);
     }
     else {
-        if(root->leftChild == NULL) {
+        if (root->rightChild == NULL && root->leftChild == NULL) {
+            free(root);
+            return NULL;
+        }
+        else if(root->leftChild == NULL) {
             treeNode* temp = root->rightChild;
             free(root);
             return temp;
@@ -267,7 +271,7 @@ int main() {
     //     cout << "Founded" << endl;
     // }
 
-    deletionBST(root, 11);
+    root = deletionBST(root, 21);
 
     inO = "";
     inOrder(root, inO);

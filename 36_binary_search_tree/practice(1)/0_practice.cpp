@@ -85,6 +85,46 @@ treeNode* searchNode(treeNode* root, int value) {
     }
 }
 
+treeNode* inorderSucc(treeNode* root) {
+    treeNode* curr = root;
+
+    while(curr->leftChild != NULL) {
+        curr = curr->leftChild;
+    }
+    return curr;
+}
+
+treeNode* deletionBST(treeNode* root, int value) {
+    if (value < root->data) {
+        root->leftChild = deletionBST(root->leftChild, value);
+    }
+    else if (value > root->data) {
+        root->rightChild = deletionBST(root->rightChild, value);
+    }
+    else {
+        if (root->rightChild == NULL && root->leftChild == NULL) {
+            free(root);
+            return NULL;
+        }
+        else if(root->leftChild == NULL) {
+            treeNode* temp = root->rightChild;
+            free(root);
+            return temp;
+        }
+        else if (root->rightChild == NULL) {
+            treeNode* temp = root->leftChild;
+            free(root);
+            return temp;
+        }
+        else {
+            treeNode* temp = inorderSucc(root->rightChild);
+            root->data = temp->data;
+            root->rightChild = deletionBST(root->rightChild, temp->data);
+        }
+    }
+    return root;
+}
+
 int main() {
     int n;
     cin >> n;
@@ -98,18 +138,16 @@ int main() {
         root = bst(root, value);
     }
 
-    // string inO = "";
+
+    string inO = "";
+    inOrder(root, inO);
+    cout << inO << endl;
+
+    root = deletionBST(root, 3);
+
+    // inO = "";
     // inOrder(root, inO);
-    // cout << inO;
-
-    // printTree(root, 0);
-
-    if (searchNode(root, 0) == NULL) {
-        cout << "value not founded" << endl;
-    }
-    else {
-        cout << "founded" << endl;
-    }
+    // cout << inO << endl;
 }
 
 
