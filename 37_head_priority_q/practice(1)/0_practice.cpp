@@ -27,6 +27,13 @@ void heapify(int a[], int n, int current) {
     }
 }
 
+void heapSort(int a[], int n) {
+    for (int i = n - 1; i >= 0; i--) {
+        swap(a[0], a[i]);
+        heapify(a, i - 1, 0);
+    }
+}
+
 int main() {
     int n;
     cin >> n;
@@ -40,6 +47,8 @@ int main() {
     for (int i = nonLeaf; i >= 0; i--) {
         heapify(a, n, i);
     }
+
+    heapSort(a, n);
 
     printArray(a, n);
 }
