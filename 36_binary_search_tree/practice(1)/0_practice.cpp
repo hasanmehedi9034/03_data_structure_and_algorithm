@@ -71,6 +71,20 @@ void printTree(treeNode* root, int level) {
     }
 }
 
+treeNode* searchNode(treeNode* root, int value) {
+    if (root == NULL) return NULL;
+
+    if (root->data == value) {
+        return root;
+    }
+    else if (root->data > value) {
+        return searchNode(root->leftChild, value);
+    }
+    else {
+        return searchNode(root->rightChild, value);
+    }
+}
+
 int main() {
     int n;
     cin >> n;
@@ -88,7 +102,14 @@ int main() {
     // inOrder(root, inO);
     // cout << inO;
 
-    printTree(root, 0);
+    // printTree(root, 0);
+
+    if (searchNode(root, 0) == NULL) {
+        cout << "value not founded" << endl;
+    }
+    else {
+        cout << "founded" << endl;
+    }
 }
 
 
