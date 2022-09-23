@@ -48,13 +48,13 @@ class Graph {
             }
         }
 
-        void DFS(int sourse) {
+        void DFS(int source) {
             static vector <bool> visited(V, false);
             queue <int> Q;
-            visited[sourse] = true;
+            visited[source] = true;
 
-            cout << sourse << " ";
-            for (auto element:adj[sourse]) {
+            cout << source << " ";
+            for (auto element:adj[source]) {
                 int v = element.first;
 
                 if (!visited[v]) {
