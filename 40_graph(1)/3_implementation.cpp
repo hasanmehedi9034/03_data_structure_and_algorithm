@@ -21,7 +21,7 @@ class Graph{
         void printNeighbour(int chk) {
             cout << chk << ": ";
             for (auto i = adj[chk].begin(); i != adj[chk].end(); i++){
-                cout << "(" << (*i).first << ", " << (*i).second << ")";
+                cout << "(" << (*i).first << ", " << (*i).second << ") ";
             }
             cout << endl;
         }
